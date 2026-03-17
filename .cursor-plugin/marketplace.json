@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "ai-coe-plugins",
-      "source": ".",
+      "source": "ai-coe-plugins",
       "description": "Rules de coding standards e skill de code review para o time"
     }
   ]
