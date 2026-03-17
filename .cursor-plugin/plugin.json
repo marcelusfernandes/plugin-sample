@@ -1,7 +1,7 @@
 {
-  "name": "plugin-sample",
+  "name": "ai-coe-plugins",
   "version": "1.0.0",
-  "description": "Plugin de exemplo para demonstrar a estrutura de plugins do Cursor para times",
+  "description": "AI CoE Plugins - Rules e Skills padronizados para o time",
   "author": {
     "name": "Marcelus Fernandes"
   },

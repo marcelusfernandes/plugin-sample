@@ -1,17 +1,17 @@
 {
-  "name": "plugin-sample-marketplace",
+  "name": "ai-coe-plugins",
   "owner": {
     "name": "Marcelus Fernandes",
     "email": "mxrcelus@gmail.com"
   },
   "metadata": {
-    "description": "Plugin de exemplo para demonstrar a estrutura de plugins do Cursor para times"
+    "description": "AI CoE Plugins - Rules e Skills padronizados para o time"
   },
   "plugins": [
     {
-      "name": "plugin-sample",
+      "name": "ai-coe-plugins",
       "source": ".",
-      "description": "Plugin com rules de coding standards e skill de code review"
+      "description": "Rules de coding standards e skill de code review para o time"
     }
   ]
 }
