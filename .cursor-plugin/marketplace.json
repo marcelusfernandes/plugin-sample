@@ -1,0 +1,17 @@
+{
+  "name": "plugin-sample-marketplace",
+  "owner": {
+    "name": "Marcelus Fernandes",
+    "email": "mxrcelus@gmail.com"
+  },
+  "metadata": {
+    "description": "Plugin de exemplo para demonstrar a estrutura de plugins do Cursor para times"
+  },
+  "plugins": [
+    {
+      "name": "plugin-sample",
+      "source": ".",
+      "description": "Plugin com rules de coding standards e skill de code review"
+    }
+  ]
+}
