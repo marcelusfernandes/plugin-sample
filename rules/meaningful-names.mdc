@@ -1,0 +1,12 @@
+---
+description: Use meaningful and descriptive names for variables, functions, and classes
+alwaysApply: true
+---
+
+Use meaningful and descriptive names for all identifiers:
+
+- Variables should describe the data they hold (e.g. `userCount` instead of `n`)
+- Functions should describe the action they perform (e.g. `fetchUserProfile` instead of `getData`)
+- Boolean variables should read like a question (e.g. `isLoading`, `hasPermission`)
+- Avoid single-letter variable names except in short lambda expressions or loop counters
+- Avoid abbreviations unless they are universally understood (e.g. `id`, `url`, `api`)

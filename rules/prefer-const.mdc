@@ -1,0 +1,8 @@
+---
+description: Prefer const over let for variables that are never reassigned
+alwaysApply: true
+---
+
+Always use `const` for variables that are never reassigned.
+Only use `let` when the variable needs to be reassigned.
+Never use `var`.
