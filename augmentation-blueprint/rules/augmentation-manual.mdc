@@ -1,0 +1,166 @@
+---
+description: Augmentation workflow — three-layer memory model, QMD knowledge search, capture-first protocol. Activates in workspaces with memory/ and knowledge/ directories.
+globs: ["memory/**", "knowledge/**"]
+---
+
+# Augmentation — Manual Operacional
+
+> This rule activates when the workspace contains `memory/` and `knowledge/` directories (an augmentation workspace). If these directories don't exist, use the `setup-augmentation` skill to scaffold one.
+
+## Session Startup
+
+At the start of every session:
+
+1. Read `memory/user-profile.md` — who you're helping
+2. Read all other `memory/` files — active contexts, feedback, references, tools
+3. Read today's and yesterday's `knowledge/journal/` entries (if they exist) — bridge with recent sessions
+4. Don't ask permission. Just do it.
+
+---
+
+## Core Principle: Capture First, Organize Second
+
+The goal is to help the user **track everything** and **cross-reference information**.
+QMD finds what you need — even with imperfect organization.
+
+- When in doubt whether to capture, **capture**
+- When in doubt where to put it, **put it in `knowledge/notes/`** and move on
+- Rich frontmatter (tags, people, context) matters more than the right folder
+- QMD searches semantically across all of knowledge/ — folders are human convenience, not a search requirement
+
+---
+
+## Data Model: Three Layers
+
+### memory/ — Current Truth (hot, always in context)
+
+Small, curated files. Read every session. Authoritative source for current state.
+
+| File | Content |
+|------|---------|
+| `user-profile.md` | Who the user is, how to work with them |
+| `active-contexts.md` | Active contexts — projects, support, investigations, themes |
+| `feedback-log.md` | Behavioral corrections (do this / don't do that) |
+| `references.md` | Reference projects, frequent links |
+| `tools.md` | Environment config — MCP servers, CLIs, endpoints |
+
+**When to write:**
+- Persistent facts about the user
+- Explicit corrections ("don't do X", "always do Y")
+- Context/priority changes
+- New tools or integrations configured
+
+**Rules:**
+- Keep each file under 100 lines
+- Use frontmatter with `type` and `updated`
+- For current state, `memory/` is the source of truth — always more authoritative than knowledge/
+- **Overflow:** when a file fills up, distill essentials and move details to knowledge/
+
+### config/ — Credentials and Access (gitignored)
+
+Keys, tokens, and sensitive configurations used by skills and integrations.
+Never goes to the repository. Read on demand.
+
+### knowledge/ — Knowledge Base (cold, via QMD)
+
+Everything worth recording. QMD indexes and searches semantically.
+
+| Directory | Content | Naming Pattern |
+|-----------|---------|----------------|
+| `journal/` | Daily log — what happened in the session | `YYYY-MM-DD.md` |
+| `meetings/` | Meeting notes | `YYYY-MM-DD-title.md` |
+| `research/` | Technical/strategic research | `topic-slug.md` |
+| `decisions/` | Decision records (ADRs) | `adr-NNN-title.md` |
+| `learnings/` | Lessons learned / TILs | `title-slug.md` |
+| `notes/` | Anything — ad-hoc info, snippets, support, ideas | `title-slug.md` |
+
+**Extensible:** create new directories when it makes sense (e.g., `people/`, `processes/`).
+
+**Standard frontmatter for every document in knowledge/:**
+
+```yaml
+---
+title: Descriptive title
+date: YYYY-MM-DD
+tags: [tag1, tag2]
+people: [name1, name2]
+context: context-name
+---
+```
+
+---
+
+## Golden Rule: Text > Brain
+
+"Mental notes" don't survive between sessions. Files do.
+
+- Want to remember something → write it to a file
+- User says "remember this" → update memory/ or create in knowledge/
+- Learned a lesson → update feedback-log.md or create in knowledge/learnings/
+- Made a mistake → document it so your future self doesn't repeat it
+
+**Never trust session memory to persist.**
+
+---
+
+## Authority Hierarchy
+
+For questions about **current state** (what context am I in? what's my preference?):
+→ `memory/` is the source of truth
+
+For questions about **history** (what did we discuss about X? when did we decide Y?):
+→ QMD searches `knowledge/`
+
+If there's a conflict between memory/ and knowledge/, memory/ wins — it's more recent and curated.
+
+---
+
+## QMD — Knowledge Search
+
+QMD provides hybrid search (BM25 + vector + reranking) 100% local.
+
+**Access:**
+- **MCP tools:** `query`, `get`, `multi_get`, `status`
+- **CLI:** `qmd query "..."`, `qmd search "..."`, `qmd get "#docid"`
+
+**Query types:**
+- `lex:` — BM25 keyword (exact terms, good for tags and names)
+- `vec:` — Vector semantic (by meaning)
+- `hyde:` — Hypothetical document
+- No prefix — auto-expands to all 3 (recommended)
+
+**Indexing:**
+- NEVER run `qmd collection add` or `qmd collection remove` automatically — ask for confirmation
+- `qmd update && qmd embed` — run automatically after creating/modifying files in `knowledge/`
+
+---
+
+## Daily Flow
+
+```
+Session start
+├── Read memory/ (user, contexts, current state)
+├── Read today + yesterday journal (bridge between sessions)
+│
+├── ... work ...
+│
+├── Update memory/ if something changed
+└── Write to knowledge/ what's relevant
+    └── Run: qmd update && qmd embed
+```
+
+---
+
+## Execution: Keep Context Lean
+
+- Prefer sub-agents for executing skills or tools
+- For complex tasks requiring deep cross-referencing, use agent teams
+
+## Available Skills
+
+| Skill | When to use |
+|-------|-------------|
+| `memory-curator` | Decide where to save information (memory/ vs knowledge/) |
+| `researcher` | Deep search in QMD + web |
+| `m365-assistant` | Microsoft 365 integration (email, calendar, Teams) |
+| `setup-augmentation` | Scaffold a new augmentation workspace |

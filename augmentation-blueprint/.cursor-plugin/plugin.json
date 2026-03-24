@@ -1,0 +1,11 @@
+{
+  "name": "augmentation-blueprint",
+  "version": "1.0.0",
+  "description": "Assistente pessoal com memória persistente, gestão de conhecimento via QMD e workflow de augmentation",
+  "author": {
+    "name": "Marcelus Fernandes"
+  },
+  "keywords": ["assistant", "memory", "knowledge", "qmd", "augmentation"],
+  "license": "MIT",
+  "repository": "https://github.com/marcelusfernandes/plugin-sample"
+}

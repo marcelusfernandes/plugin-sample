@@ -1,0 +1,12 @@
+{
+  "app_id": "14d82eec-204b-4c2f-b7e8-296a70dab67e",
+  "tenant_id": "YOUR_TENANT_ID",
+  "token_path": "~/.m365_token.json",
+  "timezone": "America/Sao_Paulo",
+  "upload": {
+    "drive_id": "YOUR_SHAREPOINT_DRIVE_ID",
+    "folder_id": "YOUR_SHAREPOINT_FOLDER_ID",
+    "base_url": "https://YOUR_TENANT.sharepoint.com/sites/YOUR_SITE/Shared%20Documents/YOUR_FOLDER"
+  },
+  "archive_dir": "~/Projects"
+}

@@ -1,61 +1,65 @@
-# Plugin Sample
+# AI CoE — Cursor Plugins
 
-Plugin de exemplo para o Cursor, demonstrando como estruturar e distribuir plugins para times.
+Plugins oficiais do time para o Cursor. Rules, skills e o Augmentation Blueprint.
 
-## O que este plugin inclui
+## Plugins disponíveis
 
-### Rules
+### [Augmentation Blueprint](./augmentation-blueprint)
 
-| Rule | Descrição |
-|------|-----------|
-| `prefer-const` | Prefira `const` em vez de `let` para variáveis que não são reatribuídas |
-| `meaningful-names` | Use nomes significativos e descritivos para variáveis, funções e classes |
+Assistente pessoal autônomo com memória persistente e gestão de conhecimento via QMD.
 
-### Skills
+- **Rules:** Soul (identidade do assistente) + Manual de Augmentation (workflow operacional)
+- **Skills:** Setup, Memory Curator, Researcher, M365 Assistant
+- **[Detalhes →](./augmentation-blueprint/README.md)**
 
-| Skill | Descrição |
-|-------|-----------|
-| `code-reviewer` | Revisa código buscando boas práticas, bugs potenciais e melhorias |
+### [AI CoE Plugins](./ai-coe-plugins)
 
-## Estrutura
+Rules de coding standards e skill de code review para o time.
 
-```
-plugin-sample/
-├── .cursor-plugin/
-│   └── plugin.json        # Manifesto do plugin (obrigatório)
-├── rules/
-│   ├── prefer-const.mdc
-│   └── meaningful-names.mdc
-├── skills/
-│   └── code-reviewer/
-│       └── SKILL.md
-├── assets/
-│   └── logo.svg
-└── README.md
-```
+- **Rules:** `prefer-const`, `meaningful-names`
+- **Skills:** `code-reviewer`
 
-## Como usar no seu time
+## Como instalar
 
-1. Vá em **Cursor Settings > Plugins** (aba "teams")
-2. Cole o link do repositório no campo **"Search or Paste Link"**:
+1. No Cursor, vá em **Settings > Plugins** (aba "teams")
+2. Cole o link do repositório:
    ```
    https://github.com/marcelusfernandes/plugin-sample
    ```
-3. O plugin será instalado e ficará disponível para todos do time
+3. Selecione os plugins que deseja instalar
+4. Os rules e skills ficam disponíveis automaticamente
 
-## Como criar seu próprio plugin
+## Pré-requisitos
 
-1. Use este repo como template
-2. Edite `.cursor-plugin/plugin.json` com os dados do seu plugin
-3. Adicione suas rules em `rules/` (arquivos `.mdc`)
-4. Adicione suas skills em `skills/<nome>/SKILL.md`
-5. Suba no GitHub e instale no time
+- [Cursor](https://cursor.com) (editor)
+- [Node.js](https://nodejs.org) >= 22 ou [Bun](https://bun.sh) >= 1.0 (para QMD)
+- [QMD](https://github.com/tobi/qmd) — `npm install -g @tobilu/qmd` (para o Augmentation Blueprint)
 
-## Referências
+## Estrutura do repositório
 
-- [Cursor Plugins Docs](https://cursor.com/docs/plugins)
-- [Plugins Reference](https://cursor.com/docs/reference/plugins)
-- [Plugin Template Oficial](https://github.com/cursor/plugin-template)
+```
+├── .cursor-plugin/
+│   └── marketplace.json           # Manifesto do marketplace
+├── augmentation-blueprint/        # Plugin: Augmentation Blueprint
+│   ├── .cursor-plugin/
+│   │   └── plugin.json
+│   ├── rules/
+│   │   ├── soul.mdc
+│   │   └── augmentation-manual.mdc
+│   ├── skills/
+│   │   ├── setup-augmentation/
+│   │   ├── memory-curator/
+│   │   ├── researcher/
+│   │   └── m365-assistant/
+│   └── README.md
+├── ai-coe-plugins/                # Plugin: Coding Standards
+│   ├── .cursor-plugin/
+│   │   └── plugin.json
+│   ├── rules/
+│   ├── skills/
+│   └── assets/
+└── README.md
+```
 
 ## License
 
