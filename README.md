@@ -1,23 +1,6 @@
-# AI CoE — Cursor Plugins
-
-Plugins oficiais do time para o Cursor. Rules, skills e o Augmentation Blueprint.
-
-## Plugins disponíveis
-
-### [Augmentation Blueprint](./augmentation-blueprint)
+# Augmentation Blueprint — Cursor Plugin
 
 Assistente pessoal autônomo com memória persistente e gestão de conhecimento via QMD.
-
-- **Rules:** Soul (identidade do assistente) + Manual de Augmentation (workflow operacional)
-- **Skills:** Setup, Memory Curator, Researcher, M365 Assistant
-- **[Detalhes →](./augmentation-blueprint/README.md)**
-
-### [AI CoE Plugins](./ai-coe-plugins)
-
-Rules de coding standards e skill de code review para o time.
-
-- **Rules:** `prefer-const`, `meaningful-names`
-- **Skills:** `code-reviewer`
 
 ## Como instalar
 
@@ -26,23 +9,55 @@ Rules de coding standards e skill de code review para o time.
    ```
    https://github.com/marcelusfernandes/plugin-sample
    ```
-3. Selecione os plugins que deseja instalar
-4. Os rules e skills ficam disponíveis automaticamente
+3. O plugin será instalado e ficará disponível automaticamente
+
+## O que inclui
+
+### Rules
+
+| Rule | Descrição |
+|------|-----------|
+| `soul` | Identidade, personalidade e limites do assistente |
+| `augmentation-manual` | Workflow operacional — modelo de memória em três camadas, QMD, protocolo capture-first |
+
+### Skills
+
+| Skill | Descrição |
+|-------|-----------|
+| `setup-augmentation` | Cria a estrutura de workspace (memory/, knowledge/, config/) |
+| `memory-curator` | Decide onde salvar informação (hot memory vs cold knowledge) |
+| `researcher` | Busca profunda no QMD + web |
+| `m365-assistant` | Integração com Microsoft 365 (email, calendar, Teams, SharePoint) |
+
+## Quick Start
+
+1. Instale o plugin no Cursor
+2. Peça ao assistente: **"set up augmentation"**
+3. Edite `memory/user-profile.md` com suas informações
+4. Instale QMD: `npm install -g @tobilu/qmd`
+5. Configure: `qmd collection add knowledge knowledge/ && qmd update && qmd embed`
+
+## Como funciona
+
+O sistema organiza informação em três camadas:
+
+- **memory/** — Verdade atual (hot). Lido em toda sessão. Perfil, contextos ativos, feedback, tools.
+- **knowledge/** — Base de conhecimento (cold). Indexado pelo QMD. Journals, meetings, research, decisions, learnings.
+- **config/** — Credenciais e acessos (gitignored).
 
 ## Pré-requisitos
 
-- [Cursor](https://cursor.com) (editor)
-- [Node.js](https://nodejs.org) >= 22 ou [Bun](https://bun.sh) >= 1.0 (para QMD)
-- [QMD](https://github.com/tobi/qmd) — `npm install -g @tobilu/qmd` (para o Augmentation Blueprint)
+- [Cursor](https://cursor.com)
+- [Node.js](https://nodejs.org) >= 22 ou [Bun](https://bun.sh) >= 1.0
+- [QMD](https://github.com/tobi/qmd) — `npm install -g @tobilu/qmd`
 
-## Estrutura do repositório
+## Estrutura
 
 ```
 ├── .cursor-plugin/
-│   └── marketplace.json           # Manifesto do marketplace
-├── augmentation-blueprint/        # Plugin: Augmentation Blueprint
-│   ├── .cursor-plugin/
-│   │   └── plugin.json
+│   └── marketplace.json
+├── augmentation-blueprint/
+│   ├── .cursor-plugin/plugin.json
 │   ├── rules/
 │   │   ├── soul.mdc
 │   │   └── augmentation-manual.mdc
@@ -52,12 +67,6 @@ Rules de coding standards e skill de code review para o time.
 │   │   ├── researcher/
 │   │   └── m365-assistant/
 │   └── README.md
-├── ai-coe-plugins/                # Plugin: Coding Standards
-│   ├── .cursor-plugin/
-│   │   └── plugin.json
-│   ├── rules/
-│   ├── skills/
-│   └── assets/
 └── README.md
 ```
 
